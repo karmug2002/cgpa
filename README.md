@@ -1,2 +1,6 @@
 # cgpa
-An android app for calcluating cgpa
+# An early prototype for calculating cgpa
+
+
+
+
