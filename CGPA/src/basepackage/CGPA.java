@@ -15,7 +15,7 @@ public abstract class CGPA
 		
 	}
 
-	public float getCgpa()
+	public float getCGPA()
 	{
 		average=totalAcquired/totalCgpa;
 		return average;

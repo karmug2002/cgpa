@@ -11,7 +11,7 @@ public class Tester
 	public static void main(String[] args)
 	{
 		Semester sem = new Semester("java.csv");
-		float cgpa = sem.getCgpa();
+		float cgpa = sem.getCGPA();
 		System.out.println(cgpa);
 	}
 

@@ -66,14 +66,14 @@ public class Semester extends CGPA
 	}
 	
 	@Override
-	public float getCgpa() //override this method from the base class to initialize the values of the protected variables
+	public float getCGPA() //override this method from the base class to initialize the values of the protected variables
 	{
 		readCSV();
 		totalCgpa();
 		totalAverageCgpa();
 		//System.out.println(totalAcquired);//these are for debug purposes only
 		//System.out.println(totalCgpa);
-		return super.getCgpa();
+		return super.getCGPA();
 	}
 	
 }
