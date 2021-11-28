@@ -27,6 +27,7 @@ public class InputProcessor
 	
 	public ArrayList<Float> getInput()
 	{
+		
 		ArrayList<Float> input= new ArrayList<Float>();
 		for(String s : semInfo.keySet())
 		{
@@ -39,7 +40,7 @@ public class InputProcessor
 	
 	private void print(String s)
 	{
-		System.out.print("Enter Your Grade for this Sub " +s+": ");
+		System.out.print("Enter Your Grade for this Subject " +s+": ");
 	}
 
 }

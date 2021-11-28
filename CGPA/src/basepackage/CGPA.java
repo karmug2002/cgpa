@@ -9,7 +9,7 @@ package basepackage;
 
 public abstract class CGPA
 {
-	protected float totalCgpa,totalAcquired,average;//visible to this package only!
+	protected float totalCGPA,totalAcquired,average;//visible to this package only!
 	public CGPA() //we will use this constructor later
 	{
 		
@@ -17,7 +17,7 @@ public abstract class CGPA
 
 	public float getCGPA()
 	{
-		average=totalAcquired/totalCgpa;
+		average=totalAcquired/totalCGPA;
 		return average;
 	}
 }
