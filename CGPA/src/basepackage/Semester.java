@@ -12,15 +12,17 @@ import java.util.HashMap;
 import org.apache.commons.csv.*;
 import edu.duke.*;
 
-public class Semester extends CGPA
+final class Semester 
 {
-	
-	private HashMap<String,Float> semInfo;//hashmaps are like dictionaries storing a key and value.
+	//field variables
+	private HashMap<String,Float> semInfo; //hashmaps are like dictionaries storing a key and value.
 	private InputProcessor ip;
 	private String fileName;
 	private FileResource file;
 	private static int semObjectCount;
 	private int sem;
+	private float totalAcquired;
+	private float totalCGPA;
 	
 	public Semester(String fileName)
 	{
@@ -36,12 +38,13 @@ public class Semester extends CGPA
 	{
 		for(String s : semInfo.keySet())
 		{
-			super.totalCGPA+=semInfo.get(s);
+			totalCGPA+=semInfo.get(s);
 		}
 	}
-
+	
 	private void totalAverageCGPA()
 	{
+		
 		ArrayList<Float> inputs = ip.getInput();	   //receive the inputs from the user
 		ArrayList<Float> cgpas = new ArrayList<Float>();//add the cgpas from the hashmap to the arraylist 
 		
@@ -52,8 +55,9 @@ public class Semester extends CGPA
 
 		for(int k=0; k<inputs.size(); k++)
 		{
-			super.totalAcquired += inputs.get(k)*cgpas.get(k);
+			totalAcquired += inputs.get(k)*cgpas.get(k);
 		}
+		
 	}
 	
 	private float parse(String s)
@@ -71,15 +75,12 @@ public class Semester extends CGPA
 		//System.out.println(semInfo);
 	}
 	
-	@Override
-	public float getCGPA() //override this method from the base class to initialize the values of the protected variables
+	public float getCGPA() //initialize the values of the private variables
 	{
 		readCSV();
 		totalCGPA();
 		totalAverageCGPA();
-		//System.out.println(super.totalAcquired);//these are for debug purposes only
-		//System.out.println(super.totalCGPA);
-		return super.getCGPA();
+		return totalAcquired/totalCGPA;
 	}
 
 	public static int getSemObjectCount()
@@ -92,6 +93,7 @@ public class Semester extends CGPA
 		Semester.semObjectCount = semObjectCount;
 	}
 	
+	@Override
 	public String toString()  //automatically called by the println fn.
 	{
 		return "Semester "+sem;

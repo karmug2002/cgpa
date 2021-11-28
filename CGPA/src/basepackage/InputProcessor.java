@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class InputProcessor
+final class InputProcessor
 {
 
 	private HashMap<String,Float> semInfo;
