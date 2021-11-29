@@ -2,7 +2,5 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/home/karmugilan/git/cgpa/dependencies/courserajava.jar"/>
-	<classpathentry kind="lib" path="/home/karmugilan/git/cgpa/dependencies/commons-csv-1.9.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

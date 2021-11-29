@@ -1,5 +1,6 @@
 package basepackage;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 /**
@@ -14,7 +15,7 @@ public class SemManager
 	private String fileName;
 	private int howMany;
 	
-	public SemManager(String dep , int howMany)
+	public SemManager(String dep , int howMany) throws IOException
 	{
 		semesters=new HashMap<String,Semester>();
 		this.fileName=dep;
@@ -22,12 +23,12 @@ public class SemManager
 		createSemObjects();
 	}
 	
-	private void createSemObjects()
+	private void createSemObjects() throws IOException
 	{
 		for(int k = 1; k<howMany+1; k++)
 		{
-			Semester sem = new Semester("data/"+fileName+"sem"+k+".csv");//create semester objects.
-			semesters.put(sem.toString() , sem);						//store the semester objects.S
+			Semester sem = new Semester(fileName+"sem"+k+".csv");//create semester objects.
+			semesters.put(sem.toString() , sem);//store the semester objects.S
 		}
 		//System.out.println(semesters);
 	}

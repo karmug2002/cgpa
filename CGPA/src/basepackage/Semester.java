@@ -1,5 +1,7 @@
 package basepackage;
 
+import java.io.IOException;
+
 /** 
  * This class handles all stuff related to cgpa.
  * @author implemented by Karmugilan for the miniproject.
@@ -9,29 +11,24 @@ package basepackage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import org.apache.commons.csv.*;
-import edu.duke.*;
+
 
 final class Semester 
 {
 	//field variables
 	private HashMap<String,Float> semInfo; //hashmaps are like dictionaries storing a key and value.
 	private InputProcessor ip;
-	private String fileName;
-	private FileResource file;
 	private static int semObjectCount;
 	private int sem;
 	private float totalAcquired;
 	private float totalCGPA;
+	private ReadingAFile readFile;
 	
-	public Semester(String fileName)
+	public Semester(String fileName) throws IOException
 	{
 		setSemObjectCount(getSemObjectCount() + 1); //keeping track of the semester objects for future use
 		this.sem=getSemObjectCount();
-		semInfo=new HashMap<String,Float>(); 
-		ip=new InputProcessor(semInfo);
-		this.fileName=fileName;
-		file = new FileResource(this.fileName);//this class reads the files from the disk
+		readFile = new ReadingAFile(fileName);//new class to read files from the disk.
 	}
 	
 	private void totalCGPA() 
@@ -44,7 +41,6 @@ final class Semester
 	
 	private void totalAverageCGPA()
 	{
-		
 		ArrayList<Float> inputs = ip.getInput();	   //receive the inputs from the user
 		ArrayList<Float> cgpas = new ArrayList<Float>();//add the cgpas from the hashmap to the arraylist 
 		
@@ -60,24 +56,10 @@ final class Semester
 		
 	}
 	
-	private float parse(String s)
-	{
-		return Float.parseFloat(s);
-	}
-	
-	public void readCSV()  //read the CSV files from the disk
-	{
-		
-		for(CSVRecord csv : file.getCSVParser(false))
-		{
-			semInfo.put(csv.get(0), parse(csv.get(1)));//update the semester info
-		}
-		//System.out.println(semInfo);
-	}
-	
 	public float getCGPA() //initialize the values of the private variables
 	{
-		readCSV();
+		semInfo = readFile.getSemInfo();
+		ip=new InputProcessor(semInfo);
 		totalCGPA();
 		totalAverageCGPA();
 		return totalAcquired/totalCGPA;

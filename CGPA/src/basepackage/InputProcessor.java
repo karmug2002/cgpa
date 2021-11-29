@@ -14,7 +14,6 @@ import java.util.Scanner;
 
 final class InputProcessor
 {
-
 	private HashMap<String,Float> semInfo;
 	private Scanner scanner;
 	private float in;

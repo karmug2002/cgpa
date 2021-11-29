@@ -1,5 +1,7 @@
 package basepackage;
 
+import java.io.IOException;
+
 /**
  * This class is purely used for testing the features only!.
  * @author implemented by Karmugilan for the miniproject.
@@ -8,7 +10,7 @@ package basepackage;
 
 public class Tester
 {
-	public static void main(String[] args)
+	public static void main(String[] args) throws IOException
 	{
 		/*
 		Semester sem = new Semester("data/csesem1.csv");
