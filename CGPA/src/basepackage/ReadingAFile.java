@@ -21,18 +21,26 @@ final class ReadingAFile
 	static private String currentDirectory;
 	private HashSet<String> lines;
 	private HashMap<String,Float> semInfo;
+	private String fileName;
 	
-	
-	public ReadingAFile(String fileName) throws IOException
+	public ReadingAFile(String fileName) 
 	{
 		currentDirectory = System.getProperty("user.dir");
 		filePath=Paths.get(currentDirectory+"/data/"+fileName);//current working dir
-		reader=Files.newBufferedReader(filePath);
+		try
+		{
+			reader=Files.newBufferedReader(filePath);
+		} catch (IOException e)
+		{
+			System.out.println("The specified file is not found! "+ fileName);
+			e.printStackTrace();
+		}
 		lines = new HashSet<String>();
 		semInfo=new HashMap<String,Float>();
+		this.fileName = fileName;
 	}
 
-	public void readFile() throws IOException
+	private void readFile() throws IOException
 	{
 		while(true)
 		{
@@ -68,7 +76,7 @@ final class ReadingAFile
 		} 
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
+			System.out.println("The specified file is not found! "+ fileName);
 			e.printStackTrace();
 		}
 		return semInfo;

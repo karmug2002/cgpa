@@ -28,7 +28,7 @@ public class SemManager
 		for(int k = 1; k<howMany+1; k++)
 		{
 			Semester sem = new Semester(fileName+"sem"+k+".csv");//create semester objects.
-			semesters.put(sem.toString() , sem);//store the semester objects.S
+			semesters.put(sem.toString() , sem);//store the semester objects.
 		}
 		//System.out.println(semesters);
 	}
@@ -37,7 +37,7 @@ public class SemManager
 	{
 		String sem="Semester "+whatSem;
 		Semester selectedSem = semesters.get(sem);
-		return selectedSem.getCGPA();			//return the cgpa for selected semester.
+		return selectedSem.getCGPA();	//return the cgpa for selected semester.
 	}
 	
 
