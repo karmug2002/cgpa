@@ -18,10 +18,10 @@ final class ReadingAFile
 {
 	private Path filePath;
 	private BufferedReader reader;
-	static private String currentDirectory;
+	private static String currentDirectory;
 	private HashSet<String> lines;
 	private HashMap<String,Float> semInfo;
-	private String fileName;
+	//private String fileName;
 	
 	public ReadingAFile(String fileName) 
 	{
@@ -37,7 +37,6 @@ final class ReadingAFile
 		}
 		lines = new HashSet<String>();
 		semInfo=new HashMap<String,Float>();
-		this.fileName = fileName;
 	}
 
 	private void readFile() throws IOException
@@ -53,7 +52,7 @@ final class ReadingAFile
 		}
 	}
 	
-	private float parse(String s)
+	private static float parse(String s)
 	{
 		return Float.parseFloat(s);
 	}
@@ -67,16 +66,14 @@ final class ReadingAFile
 		}
 	}
 	
-	public HashMap<String,Float> getSemInfo()
+	public HashMap<String,Float> getSemInfo() 
 	{
 		try
 		{
 			readFile();
 			valueSep();
-		} 
-		catch (IOException e)
+		} catch (IOException e)
 		{
-			System.out.println("The specified file is not found! "+ fileName);
 			e.printStackTrace();
 		}
 		return semInfo;
