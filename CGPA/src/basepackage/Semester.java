@@ -16,19 +16,20 @@ import java.util.HashMap;
 final class Semester 
 {
 	//field variables
-	private HashMap<String,Float> semInfo; //hashmaps are like dictionaries storing a key and value.
+	private HashMap<String,Float> semInfo; //hashmaps are like dictionaries storing a key and a value.
 	private InputProcessor ip;
 	private static int semObjectCount;
 	private int sem;
 	private float totalAcquired;
 	private float totalCGPA;
-	private ReadingAFile readFile;
+	private CSVParser readFile;
 	
 	public Semester(String fileName) throws IOException
 	{
 		setSemObjectCount(getSemObjectCount() + 1); //keeping track of the semester objects for future use
 		this.sem=getSemObjectCount();
-		readFile = new ReadingAFile(fileName);//new class to read files from the disk.
+		readFile = new CSVParser(fileName);//new class to read files from the disk.
+		semInfo = readFile.getSemInfo(); //initialize the semInfo in the constructor;
 	}
 	
 	private void totalCGPA() 
@@ -58,7 +59,6 @@ final class Semester
 	
 	public float getCGPA() //initialize the values of the private variables
 	{
-		semInfo = readFile.getSemInfo();
 		ip=new InputProcessor(semInfo);
 		totalCGPA();
 		totalAverageCGPA();
@@ -75,10 +75,15 @@ final class Semester
 		Semester.semObjectCount = semObjectCount;
 	}
 	
+	public String getName()
+	{
+		return "Semester "+sem;
+	}
+	
 	@Override
 	public String toString()  //automatically called by the println fn.
 	{
-		return "Semester "+sem;
+		return semInfo.toString();
 	}
 	
 }

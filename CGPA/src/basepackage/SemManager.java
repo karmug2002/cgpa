@@ -6,7 +6,6 @@ import java.util.HashMap;
 /**
  * This class will manage the semester objects.
  * @author karmugilan
- *
  */
 
 public class SemManager
@@ -28,7 +27,7 @@ public class SemManager
 		for(int k = 1; k<howMany+1; k++)
 		{
 			Semester sem = new Semester(fileName+"sem"+k+".csv");//create semester objects.
-			semesters.put(sem.toString() , sem);//store the semester objects.
+			semesters.put(sem.getName() , sem);//store the semester objects.
 		}
 		//System.out.println(semesters);
 	}
