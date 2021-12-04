@@ -12,21 +12,24 @@ public class SemManager
 {
 	private HashMap<String,Semester> semesters;//Stores semester objects mapped to the semester name.
 	private String fileName;
-	private int howMany;
+	//private int howMany;
 	
-	public SemManager(String dep , int howMany) throws IOException
+	public SemManager(String dep) throws IOException
 	{
 		semesters=new HashMap<String,Semester>();
 		this.fileName=dep;
-		this.howMany=howMany;
+		//this.howMany=howMany;
 		createSemObjects();
 	}
 	
 	private void createSemObjects() throws IOException
 	{
-		for(int k = 1; k<howMany+1; k++)
+		CSVParser cv = new CSVParser(fileName+"data.csv");
+		HashMap<String,HashMap<String,Float>> semestersInfo =cv.getSemesters();
+		for(int k = 1; k<semestersInfo.size(); k++)
 		{
-			Semester sem = new Semester(fileName+"sem"+k+".csv");//create semester objects.
+			HashMap<String,Float> semInfo=semestersInfo.get("Semester "+ k);
+			Semester sem = new Semester(semInfo);//create semester objects.
 			semesters.put(sem.getName() , sem);//store the semester objects.
 		}
 		//System.out.println(semesters);

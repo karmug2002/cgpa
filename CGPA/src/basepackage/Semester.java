@@ -24,12 +24,13 @@ final class Semester
 	private float totalCGPA;
 	private CSVParser readFile;
 	
-	public Semester(String fileName) throws IOException
+	public Semester(HashMap<String,Float> semInfo) throws IOException
 	{
 		setSemObjectCount(getSemObjectCount() + 1); //keeping track of the semester objects for future use
 		this.sem=getSemObjectCount();
-		readFile = new CSVParser(fileName);//new class to read files from the disk.
-		semInfo = readFile.getSemInfo(); //initialize the semInfo in the constructor;
+		//readFile = new CSVParser(fileName);//new class to read files from the disk.
+		//semInfo = readFile.getSemInfo(); //initialize the semInfo in the constructor;
+		this.semInfo=semInfo;
 	}
 	
 	private void totalCGPA() 

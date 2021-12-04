@@ -12,8 +12,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 final class CSVParser
 {
@@ -22,6 +27,8 @@ final class CSVParser
 	private static String currentDirectory;
 	private HashSet<String> lines;
 	private HashMap<String,Float> semInfo;
+	private HashMap<String,HashMap<String,Float>> semesters;
+
 	//private String fileName;
 	
 	public CSVParser(String fileName) 
@@ -42,6 +49,7 @@ final class CSVParser
 			}
 			lines = new HashSet<String>();
 			semInfo=new HashMap<String,Float>();
+			semesters=new HashMap<String,HashMap<String,Float>>();
 		}
 		else   //this code is for windows but java automatically supports for windows dir navigation but I added it just in case.
 		{
@@ -55,13 +63,15 @@ final class CSVParser
 				e.printStackTrace();
 			}
 			lines = new HashSet<String>();
-			semInfo=new HashMap<String,Float>();
+			//semInfo=new HashMap<String,Float>();
 		}
 		
 	}
-
+	
 	private void readFile() throws IOException
 	{
+		int count=1;
+		//HashMap<String,Float> semInfo = new HashMap<String,Float>();
 		while(true)
 		{
 			String line = reader.readLine();
@@ -69,8 +79,30 @@ final class CSVParser
 			{
 				break;
 			}
-			lines.add(line);	
+			//lines.add(line);
+			String[] strs = line.split(",");
+			//System.out.println(Arrays.toString(strs));
+			String s="Semester "+count;
+			if(!line.startsWith(s))
+			{
+				//System.out.println(line);
+				semInfo.put(strs[2], parse(strs[strs.length-1]));
+			}
+			else
+			{
+				//if(!semesters.containsKey(s))
+				semesters.put(s, semInfo);
+				//semInfo = null;
+				//System.out.println(semInfo + " " +s);
+				semInfo = null;
+				semInfo = new HashMap<String,Float>();
+				count+=1;
+				//System.out.println(semInfo);
+			}
+			//System.out.println(line);
 		}
+		//System.out.println(semInfo);
+		//System.out.println(semesters.get("Semester 6"));
 	}
 	
 	private static float parse(String s)
@@ -80,11 +112,14 @@ final class CSVParser
 	
 	private void valueSep()
 	{
+		//System.out.println(lines);
 		for(String s : lines)
 		{
-			String[] strs = s.split(",");
-			//System.out.println(strs);
-			semInfo.put(strs[0], parse(strs[1])); //splitting the String using "," delimeter
+			//String[] strs = s.split(",");
+			//System.out.println(Arrays.toString(strs));
+			//System.out.println(semInfo);
+			//if(!strs[strs.length-1].isEmpty())
+				//semInfo.put(strs[2], parse(strs[strs.length-1])); //splitting the String using "," delimeter
 		}
 	}
 	
@@ -99,7 +134,20 @@ final class CSVParser
 		{
 			e.printStackTrace();
 		}
+		//return semInfo;
 		return semInfo;
+	}
+	public HashMap<String,HashMap<String,Float>> getSemesters()
+	{
+		try
+		{
+			readFile();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		return semesters;
 	}
 
 }

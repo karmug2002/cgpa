@@ -26,7 +26,7 @@ public class Tester
 		float cgpa = sem.getCGPA();
 		System.out.println(cgpa);
 		*/
-		SemManager cseManager = new SemManager("cse",3);
+		SemManager cseManager = new SemManager("cse");
 		float cg = cseManager.getCGPAForOneSem(2);
 		System.out.println(cg);
 	}
