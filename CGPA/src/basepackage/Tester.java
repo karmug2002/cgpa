@@ -1,5 +1,11 @@
 package basepackage;
 
+<<<<<<< Updated upstream
+=======
+import java.io.IOException;
+import java.util.HashMap;
+
+>>>>>>> Stashed changes
 /**
  * This class is purely used for testing the features only!.
  * @author implemented by Karmugilan for the miniproject.
@@ -25,9 +31,20 @@ public class Tester
 		float cgpa = sem.getCGPA();
 		System.out.println(cgpa);
 		*/
+<<<<<<< Updated upstream
 		SemManager cseManager = new SemManager("cse",3);
 		float cg = cseManager.getCGPAForOneSem(3);
+=======
+		SemManager cseManager = new SemManager("cse");
+		float cg = cseManager.getCGPAForOneSem(1);		
+>>>>>>> Stashed changes
 		System.out.println(cg);
+		
+		//CSVParser cv = new CSVParser("data.csv");
+		//HashMap<String,HashMap<String,Float>> semesters =cv.getSemesters();
+		//System.out.println(semesters.get("Semester 1"));
+		//System.out.println(semInfo);
+
 	}
 
 }
