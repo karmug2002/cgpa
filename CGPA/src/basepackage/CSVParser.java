@@ -12,20 +12,20 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
+//import java.util.ArrayList;
+//import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+//import java.util.HashSet;
+//import java.util.List;
+//import java.util.regex.Matcher;
+//import java.util.regex.Pattern;
 
 final class CSVParser
 {
 	private Path filePath;
 	private BufferedReader reader;
 	private static String currentDirectory;
-	private HashSet<String> lines;
+	//private HashSet<String> lines;
 	private HashMap<String,Float> semInfo;
 	private HashMap<String,HashMap<String,Float>> semesters;
 
@@ -47,7 +47,7 @@ final class CSVParser
 				System.out.println("The specified file is not found! "+ fileName);
 				e.printStackTrace();
 			}
-			lines = new HashSet<String>();
+			//lines = new HashSet<String>();
 			semInfo=new HashMap<String,Float>();
 			semesters=new HashMap<String,HashMap<String,Float>>();
 		}
@@ -62,10 +62,16 @@ final class CSVParser
 				System.out.println("The specified file is not found! "+ fileName);
 				e.printStackTrace();
 			}
-			lines = new HashSet<String>();
-			//semInfo=new HashMap<String,Float>();
+			//lines = new HashSet<String>();
+			semInfo=new HashMap<String,Float>();
+			semesters=new HashMap<String,HashMap<String,Float>>();
 		}
 		
+	}
+	
+	private static float parse(String s)
+	{
+		return Float.parseFloat(s);
 	}
 	
 	private void readFile() throws IOException
@@ -105,24 +111,34 @@ final class CSVParser
 		//System.out.println(semesters.get("Semester 6"));
 	}
 	
-	private static float parse(String s)
+	public HashMap<String,HashMap<String,Float>> getSemesters()
 	{
-		return Float.parseFloat(s);
+		try
+		{
+			readFile();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		return semesters;
 	}
+
 	
+	/* old method for reading files!!
 	private void valueSep()
 	{
 		//System.out.println(lines);
 		for(String s : lines)
 		{
-			//String[] strs = s.split(",");
+			String[] strs = s.split(",");
 			//System.out.println(Arrays.toString(strs));
 			//System.out.println(semInfo);
-			//if(!strs[strs.length-1].isEmpty())
-				//semInfo.put(strs[2], parse(strs[strs.length-1])); //splitting the String using "," delimeter
+			semInfo.put(strs[0], parse(strs[1])); //splitting the String using "," delimeter
 		}
 	}
-	
+	*/
+	/* old methods not scalable
 	public HashMap<String,Float> getSemInfo() 
 	{
 		try
@@ -137,17 +153,5 @@ final class CSVParser
 		//return semInfo;
 		return semInfo;
 	}
-	public HashMap<String,HashMap<String,Float>> getSemesters()
-	{
-		try
-		{
-			readFile();
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		return semesters;
-	}
-
+	*/
 }
