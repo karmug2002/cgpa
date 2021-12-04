@@ -8,10 +8,8 @@ import java.io.IOException;
  * 
  */
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
-
 
 final class Semester 
 {
@@ -58,6 +56,7 @@ final class Semester
 	
 	public float getCGPA() //initialize the values of the private variables
 	{
+		System.out.println("Current Semester is : "+this.getName());
 		ip=new InputProcessor(semInfo);
 		totalCGPA();
 		totalAverageCGPA();

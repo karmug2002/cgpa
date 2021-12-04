@@ -12,8 +12,9 @@ public class Tester
 	public static void main(String[] args) throws IOException
 	{
 		SemManager cseManager = new SemManager("cse");
-		float cg = cseManager.getCGPAForOneSem(2);
-		System.out.println(cg);
+		float cgpaForSem1 = cseManager.getCGPAForOneSem(1);
+		//float cpaForSem2 = cseManager.getCGPAForOneSem(2);
+		System.out.println(cgpaForSem1);
 	}
 
 }

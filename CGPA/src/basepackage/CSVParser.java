@@ -25,23 +25,19 @@ final class CSVParser
 	public CSVParser(String fileName) 
 	{
 		currentDirectory = System.getProperty("user.dir"); //returns the current working dir.
-		String osName = System.getProperty("os.name");	//returns the os name.
-		if(osName.equals("Linux"))
+		//String osName = System.getProperty("os.name");	//returns the os name.
+		filePath=Paths.get(currentDirectory+"/data/"+fileName);//current working dir
+		try
 		{
-			filePath=Paths.get(currentDirectory+"/data/"+fileName);//current working dir
-			try
-			{
-				reader=Files.newBufferedReader(filePath);
-			} 
-			catch (IOException e)
-			{
-				System.out.println("The specified file is not found! "+ fileName);
-				e.printStackTrace();
-			}
-			semInfo=new HashMap<String,Float>();
-			semesters=new HashMap<String,HashMap<String,Float>>();
+			reader=Files.newBufferedReader(filePath);
+		} 
+		catch (IOException e)
+		{
+			System.out.println("The specified file is not found! "+ fileName);
+			e.printStackTrace();
 		}
-	
+		semInfo=new HashMap<String,Float>();
+		semesters=new HashMap<String,HashMap<String,Float>>();
 	}
 	
 	private static float parse(String s)
@@ -57,7 +53,7 @@ final class CSVParser
 			String line = reader.readLine();
 			if(line==null)
 				break;
-			String[] strs = line.split(",");
+			String[] strs = line.split(",");  //splitting the strings using ","
 			String s="Semester "+count;
 			if(!line.startsWith(s))
 			{
@@ -65,10 +61,10 @@ final class CSVParser
 			}
 			else
 			{
-				semesters.put(s, semInfo);
-				semInfo = null;
-				semInfo = new HashMap<String,Float>();
-				count+=1;
+				semesters.put(s, semInfo);//old object 
+				semInfo = null;           //deleting the old reference
+				semInfo = new HashMap<String,Float>();//adding a new reference,new object to store the data
+				count++;    //to know what semester is.
 			}
 		}
 	}

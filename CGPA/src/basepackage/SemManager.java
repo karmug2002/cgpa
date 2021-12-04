@@ -23,10 +23,10 @@ public class SemManager
 	private void createSemObjects() throws IOException
 	{
 		CSVParser cv = new CSVParser(fileName+"data.csv");
-		HashMap<String,HashMap<String,Float>> semestersInfo =cv.getSemesters();
+		HashMap<String,HashMap<String,Float>> semestersInfo = cv.getSemesters(); //get the semester Infos!!
 		for(int k = 1; k<semestersInfo.size(); k++)
 		{
-			HashMap<String,Float> semInfo=semestersInfo.get("Semester "+ k);
+			HashMap<String,Float> semInfo=semestersInfo.get("Semester "+ k);//get the correct semester info!!
 			Semester sem = new Semester(semInfo);//create semester objects.
 			semesters.put(sem.getName() , sem);//store the semester objects.
 		}
