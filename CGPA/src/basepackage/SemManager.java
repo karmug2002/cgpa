@@ -12,13 +12,11 @@ public class SemManager
 {
 	private HashMap<String,Semester> semesters;//Stores semester objects mapped to the semester name.
 	private String fileName;
-	//private int howMany;
 	
 	public SemManager(String dep) throws IOException
 	{
 		semesters=new HashMap<String,Semester>();
 		this.fileName=dep;
-		//this.howMany=howMany;
 		createSemObjects();
 	}
 	

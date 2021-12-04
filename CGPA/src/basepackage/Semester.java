@@ -28,8 +28,6 @@ final class Semester
 	{
 		setSemObjectCount(getSemObjectCount() + 1); //keeping track of the semester objects for future use
 		this.sem=getSemObjectCount();
-		//readFile = new CSVParser(fileName);//new class to read files from the disk.
-		//semInfo = readFile.getSemInfo(); //initialize the semInfo in the constructor;
 		this.semInfo=semInfo; //receive the semInfo from the constructor!!
 	}
 	
