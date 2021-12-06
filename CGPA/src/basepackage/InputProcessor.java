@@ -20,18 +20,18 @@ final class InputProcessor
 	
 	public InputProcessor(HashMap<String,Float> semInfo)
 	{
-		this.semInfo=semInfo;
-		scanner=new Scanner(System.in);
+		this.semInfo = semInfo;
+		scanner = new Scanner(System.in);
 	}
 	
 	public ArrayList<Float> getInput()
 	{
 		
-		ArrayList<Float> input= new ArrayList<Float>();
+		ArrayList<Float> input = new ArrayList<Float>();
 		for(String s : semInfo.keySet())
 		{
 			print(s);
-			in=scanner.nextFloat();
+			in = scanner.nextFloat();
 			input.add(in);
 		}
 		return input;
@@ -39,7 +39,7 @@ final class InputProcessor
 	
 	private void print(String s)
 	{
-		System.out.print("Enter Your Grade for this Subject " +s+": ");
+		System.out.print("Enter Your Grade for this Subject " + s +": ");
 	}
 
 }

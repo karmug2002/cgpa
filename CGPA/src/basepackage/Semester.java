@@ -18,49 +18,46 @@ final class Semester
 	private InputProcessor ip;
 	private static int semObjectCount;
 	private int sem;
-	private float totalAcquired;
-	private float totalCGPA;
+	private float totalAcquiredCP;
+	private float totalGivenCP;
+	private ArrayList<Float> givenCps;
 	//private CSVParser readFile;
 	
 	public Semester(HashMap<String,Float> semInfo) throws IOException
 	{
 		setSemObjectCount(getSemObjectCount() + 1); //keeping track of the semester objects for future use
-		this.sem=getSemObjectCount();
-		this.semInfo=semInfo; //receive the semInfo from the constructor!!
+		this.sem = getSemObjectCount();
+		this.semInfo = semInfo; //receive the semInfo from the constructor!!
+		givenCps = new ArrayList<Float>();
 	}
 	
-	private void totalCGPA() 
+	private void sumGivenCps() 
 	{
-		for(String s : semInfo.keySet())
+		for(Float value : semInfo.values())
 		{
-			totalCGPA+=semInfo.get(s);
+			totalGivenCP += value;
+			givenCps.add(value);//add the given credit points from the hashmap to the arraylist 
 		}
 	}
 	
-	private void totalAverageCGPA()
+	private void sumAcquiredCPs()
 	{
 		ArrayList<Float> inputs = ip.getInput();	   //receive the inputs from the user
-		ArrayList<Float> cgpas = new ArrayList<Float>();//add the cgpas from the hashmap to the arraylist 
-		
-		for(String s : semInfo.keySet())
-		{
-			cgpas.add(semInfo.get(s));
-		}
 
-		for(int k=0; k<inputs.size(); k++)
+		for(int k = 0; k<inputs.size(); k++)
 		{
-			totalAcquired += inputs.get(k)*cgpas.get(k);
+			totalAcquiredCP += inputs.get(k) * givenCps.get(k);
 		}
 		
 	}
 	
 	public float getCGPA() //initialize the values of the private variables
 	{
-		System.out.println("Current Semester is : "+this.getName());
-		ip=new InputProcessor(semInfo);
-		totalCGPA();
-		totalAverageCGPA();
-		return totalAcquired/totalCGPA;
+		System.out.println("Current Semester is : " + this.getName());
+		ip = new InputProcessor(semInfo);
+		sumGivenCps();
+		sumAcquiredCPs();
+		return totalAcquiredCP/totalGivenCP;
 	}
 
 	public static int getSemObjectCount()
@@ -75,7 +72,7 @@ final class Semester
 	
 	public String getName()
 	{
-		return "Semester "+sem;
+		return "Semester " + sem;
 	}
 	
 	@Override
