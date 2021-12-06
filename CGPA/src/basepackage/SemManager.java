@@ -15,27 +15,27 @@ public class SemManager
 	
 	public SemManager(String dep) throws IOException
 	{
-		semesters=new HashMap<String,Semester>();
-		this.fileName=dep;
+		semesters = new HashMap<String,Semester>();
+		this.fileName = dep;
 		createSemObjects();
 	}
 	
 	private void createSemObjects() throws IOException
 	{
-		CSVParser cv = new CSVParser(fileName+"data.csv");
-		HashMap<String,HashMap<String,Float>> semestersInfo = cv.getSemesters(); //get the semester Infos!!
-		for(int k = 1; k<semestersInfo.size(); k++)
+		CSVParser cv = new CSVParser(fileName + "data.csv");
+		HashMap<String,HashMap<String,Float>> semestersInfo = cv.getSemesterInfos(); //get the semester Infos!!
+		for(int k = 1; k<semestersInfo.size()+1; k++) 
 		{
-			HashMap<String,Float> semInfo=semestersInfo.get("Semester "+ k);//get the correct semester info!!
+			HashMap<String,Float> semInfo = semestersInfo.get("Semester "+ k);//get the correct semester info!!
 			Semester sem = new Semester(semInfo);//create semester objects.
 			semesters.put(sem.getName() , sem);//store the semester objects.
 		}
 		//System.out.println(semesters);
 	}
 	
-	public float getCGPAForOneSem(int whatSem) 	//this method returns cgpa for the selected semester
+	public float getCGPAForOneSem(int whichSem) 	//this method returns cgpa for the selected semester
 	{
-		String sem="Semester "+whatSem;
+		String sem = "Semester "+whichSem;
 		Semester selectedSem = semesters.get(sem);
 		return selectedSem.getCGPA();	//return the cgpa for selected semester.
 	}
