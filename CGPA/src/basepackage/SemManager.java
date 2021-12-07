@@ -8,7 +8,7 @@ import java.util.HashMap;
  * @author karmugilan
  */
 
-public class SemManager
+public final class SemManager
 {
 	private HashMap<String,Semester> semesters;//Stores semester objects mapped to the semester name.
 	private String fileName;
@@ -28,7 +28,7 @@ public class SemManager
 		{
 			HashMap<String,Float> semInfo = semestersInfo.get("Semester "+ k);//get the correct semester info!!
 			Semester sem = new Semester(semInfo);//create semester objects.
-			semesters.put(sem.getName() , sem);//store the semester objects.
+			semesters.put("Semester "+k , sem);//store the semester objects.
 		}
 		//System.out.println(semesters);
 	}
@@ -37,6 +37,7 @@ public class SemManager
 	{
 		String sem = "Semester "+whichSem;
 		Semester selectedSem = semesters.get(sem);
+		System.out.println("Current Semester is : "+ sem);
 		return selectedSem.getCGPA();	//return the cgpa for selected semester.
 	}
 	
