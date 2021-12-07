@@ -19,7 +19,6 @@ final  class Semester
 	private float totalAcquiredCP;
 	private float totalGivenCP;
 	private ArrayList<Float> givenCps;
-	//private CSVParser readFile;
 	
 	public Semester(HashMap<String,Float> semInfo) throws IOException
 	{
