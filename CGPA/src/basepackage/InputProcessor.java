@@ -5,7 +5,6 @@ package basepackage;
  * for now , but  as the app develops this class
  * will be modified.
  * @author implemented by Karmugilan for the miniproject.
- * 
  */
 
 import java.util.ArrayList;
@@ -17,13 +16,7 @@ final class InputProcessor
 	private HashMap<ArrayList<String>,ArrayList<Float>> semInfo;
 	private Scanner scanner;
 	private float in;
-	/*
-	public InputProcessor(HashMap<String,Float> semInfo)
-	{
-		this.semInfo = semInfo;
-		scanner = new Scanner(System.in);
-	}
-	*/
+	
 	public InputProcessor(HashMap<ArrayList<String>, ArrayList<Float>> semInfo)
 	{
 		this.semInfo = semInfo;

@@ -18,20 +18,14 @@ final  class Semester
 	private InputProcessor ip;
 	private float totalAcquiredCP;
 	private float totalGivenCP;
-	private ArrayList<Float> givenCps;
-	/*
-	public Semester(HashMap<String,Float> semInfo) throws IOException
-	{
-		this.semInfo = semInfo; //receive the semInfo from the constructor!!
-		givenCps = new ArrayList<Float>();
-	}*/
+	private ArrayList<Float> givenCPS;
+	
 	public Semester(HashMap<ArrayList<String>,ArrayList<Float>> semInfo) throws IOException
 	{
 		this.semInfo = semInfo; //receive the semInfo from the constructor!!
-		//givenCps = new ArrayList<Float>();
 	}
 	
-	private void sumGivenCps() 
+	private void sumGivenCPS() 
 	{
 		for(ArrayList<Float> value : semInfo.values())
 		{
@@ -39,18 +33,17 @@ final  class Semester
 			{
 				totalGivenCP+=v;
 			}
-			givenCps = value;//add the given credit points from the hashmap to the arraylist 
+			givenCPS = value; //initialize givenCPS from the semInfo
 		}
-
 	}
 	
-	private void sumAcquiredCPs()
+	private void sumAcquiredCPS()
 	{
 		ArrayList<Float> inputs = ip.getInput();	   //receive the inputs from the user
 
 		for(int k = 0; k<inputs.size(); k++)
 		{
-			totalAcquiredCP += inputs.get(k) * givenCps.get(k);
+			totalAcquiredCP += inputs.get(k) * givenCPS.get(k);
 		}
 		
 	}
@@ -58,8 +51,8 @@ final  class Semester
 	public float getCGPA() //initialize the values of the private variables
 	{
 		ip = new InputProcessor(semInfo);
-		sumGivenCps();
-		sumAcquiredCPs();
+		sumGivenCPS();
+		sumAcquiredCPS();
 		return totalAcquiredCP/totalGivenCP;
 	}
 

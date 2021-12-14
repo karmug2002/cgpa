@@ -17,13 +17,12 @@ import java.util.HashMap;
 
 final class CSVParser
 {
+	//field variables
 	private Path filePath;
 	private BufferedReader reader;
 	private static String currentDirectory;
-	private HashMap<String,Float> semInfo;
-	private HashMap<String,HashMap<String,Float>> semesterInfos;
-	private HashMap<ArrayList<String>,ArrayList<Float>> sem = new HashMap<ArrayList<String>,ArrayList<Float>>();
-	private HashMap<String,HashMap<ArrayList<String>,ArrayList<Float>>> semesters  = new HashMap<String,HashMap<ArrayList<String>,ArrayList<Float>>>();
+	private HashMap<ArrayList<String>,ArrayList<Float>> semInfo;
+	private HashMap<String,HashMap<ArrayList<String>,ArrayList<Float>>> semesterInfos;
 	
 	public CSVParser(String fileName) 
 	{
@@ -39,8 +38,8 @@ final class CSVParser
 			System.out.println("The specified file is not found! " + fileName);
 			e.printStackTrace();
 		}
-		semInfo = new HashMap<String,Float>();
-		semesterInfos = new HashMap<String,HashMap<String,Float>>();
+		semInfo = new HashMap<ArrayList<String>,ArrayList<Float>>();		
+		semesterInfos = new HashMap<String,HashMap<ArrayList<String>,ArrayList<Float>>>();
 	}
 	
 	private static float parse(String s)
@@ -51,42 +50,37 @@ final class CSVParser
 	private void readFile() throws IOException
 	{
 		int count = 1;
-		ArrayList<String> string = new ArrayList<String>();
-		ArrayList<Float> fl = new ArrayList<Float>();
+		ArrayList<String> semNames = new ArrayList<String>();
+		ArrayList<Float> givenCPS = new ArrayList<Float>();
 		while(true)
 		{
 			String line = reader.readLine();
 			if(line == null)
 				break;
+			
 			String[] strs = line.split(",");  //splitting the strings using ","
 			String s = "Semester "+count;
+			
 			if(!line.startsWith(s))
 			{
-				semInfo.put(strs[2], parse(strs[strs.length-1]));
-				string.add(strs[2]);
-				fl.add(parse(strs[strs.length-1]));
+				semNames.add(strs[2]);
+				givenCPS.add(parse(strs[strs.length-1]));
 				
 			}
 			else
 			{
-				sem.put(string,fl);
+				semInfo.put(semNames,givenCPS);
 				semesterInfos.put(s, semInfo);//old object 
-				semInfo = null;           //deleting the old reference
-				semInfo = new HashMap<String,Float>();//adding a new reference,new object to store the data
-				semesters.put(s, sem);
-				sem=null;
-				string = null;
-				fl = null;
-				sem = new HashMap<ArrayList<String>,ArrayList<Float>>();
-				string = new ArrayList<String>();
-				fl = new ArrayList<Float>();
+				semInfo = new HashMap<ArrayList<String>,ArrayList<Float>>();//adding a new reference,new object to store the data
+				semNames = new ArrayList<String>();
+				givenCPS = new ArrayList<Float>();
 				count++;    //to know what semester is.
 			}
+			
 		}
-		//System.out.println(semesters.get("Semester 2"));
 	}
 	
-	public HashMap<String,HashMap<String,Float>> getSemesterInfos()
+	public HashMap<String,HashMap<ArrayList<String>,ArrayList<Float>>> getSemesterInfos()
 	{
 		try
 		{
@@ -96,20 +90,7 @@ final class CSVParser
 		{
 			e.printStackTrace();
 		}
-		return this.semesterInfos;
-	}
-	
-	public HashMap<String,HashMap<ArrayList<String>,ArrayList<Float>>> newSem()
-	{
-		try
-		{
-			this.readFile();
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		return semesters;
+		return semesterInfos;
 	}
 
 }
