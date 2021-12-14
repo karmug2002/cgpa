@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 final class CSVParser
@@ -21,6 +22,8 @@ final class CSVParser
 	private static String currentDirectory;
 	private HashMap<String,Float> semInfo;
 	private HashMap<String,HashMap<String,Float>> semesterInfos;
+	private HashMap<ArrayList<String>,ArrayList<Float>> sem = new HashMap<ArrayList<String>,ArrayList<Float>>();
+	private HashMap<String,HashMap<ArrayList<String>,ArrayList<Float>>> semesters  = new HashMap<String,HashMap<ArrayList<String>,ArrayList<Float>>>();
 	
 	public CSVParser(String fileName) 
 	{
@@ -48,6 +51,8 @@ final class CSVParser
 	private void readFile() throws IOException
 	{
 		int count = 1;
+		ArrayList<String> string = new ArrayList<String>();
+		ArrayList<Float> fl = new ArrayList<Float>();
 		while(true)
 		{
 			String line = reader.readLine();
@@ -58,15 +63,27 @@ final class CSVParser
 			if(!line.startsWith(s))
 			{
 				semInfo.put(strs[2], parse(strs[strs.length-1]));
+				string.add(strs[2]);
+				fl.add(parse(strs[strs.length-1]));
+				
 			}
 			else
 			{
+				sem.put(string,fl);
 				semesterInfos.put(s, semInfo);//old object 
 				semInfo = null;           //deleting the old reference
 				semInfo = new HashMap<String,Float>();//adding a new reference,new object to store the data
+				semesters.put(s, sem);
+				sem=null;
+				string = null;
+				fl = null;
+				sem = new HashMap<ArrayList<String>,ArrayList<Float>>();
+				string = new ArrayList<String>();
+				fl = new ArrayList<Float>();
 				count++;    //to know what semester is.
 			}
 		}
+		//System.out.println(semesters.get("Semester 2"));
 	}
 	
 	public HashMap<String,HashMap<String,Float>> getSemesterInfos()
@@ -80,6 +97,19 @@ final class CSVParser
 			e.printStackTrace();
 		}
 		return this.semesterInfos;
+	}
+	
+	public HashMap<String,HashMap<ArrayList<String>,ArrayList<Float>>> newSem()
+	{
+		try
+		{
+			this.readFile();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		return semesters;
 	}
 
 }

@@ -14,25 +14,34 @@ import java.util.HashMap;
 final  class Semester 
 {
 	//field variables
-	private HashMap<String,Float> semInfo; //hashmaps are like dictionaries storing a key and a value.
+	private HashMap<ArrayList<String>,ArrayList<Float>> semInfo; //hashmaps are like dictionaries storing a key and a value.
 	private InputProcessor ip;
 	private float totalAcquiredCP;
 	private float totalGivenCP;
 	private ArrayList<Float> givenCps;
-	
+	/*
 	public Semester(HashMap<String,Float> semInfo) throws IOException
 	{
 		this.semInfo = semInfo; //receive the semInfo from the constructor!!
 		givenCps = new ArrayList<Float>();
+	}*/
+	public Semester(HashMap<ArrayList<String>,ArrayList<Float>> semInfo) throws IOException
+	{
+		this.semInfo = semInfo; //receive the semInfo from the constructor!!
+		//givenCps = new ArrayList<Float>();
 	}
 	
 	private void sumGivenCps() 
 	{
-		for(Float value : semInfo.values())
+		for(ArrayList<Float> value : semInfo.values())
 		{
-			totalGivenCP += value;
-			givenCps.add(value);//add the given credit points from the hashmap to the arraylist 
+			for(Float v : value)
+			{
+				totalGivenCP+=v;
+			}
+			givenCps = value;//add the given credit points from the hashmap to the arraylist 
 		}
+
 	}
 	
 	private void sumAcquiredCPs()

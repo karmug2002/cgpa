@@ -14,25 +14,35 @@ import java.util.Scanner;
 
 final class InputProcessor
 {
-	private HashMap<String,Float> semInfo;
+	private HashMap<ArrayList<String>,ArrayList<Float>> semInfo;
 	private Scanner scanner;
 	private float in;
-	
+	/*
 	public InputProcessor(HashMap<String,Float> semInfo)
 	{
 		this.semInfo = semInfo;
 		scanner = new Scanner(System.in);
 	}
-	
+	*/
+	public InputProcessor(HashMap<ArrayList<String>, ArrayList<Float>> semInfo)
+	{
+		this.semInfo = semInfo;
+		scanner = new Scanner(System.in);
+	}
+
 	public ArrayList<Float> getInput()
 	{
 		
 		ArrayList<Float> input = new ArrayList<Float>();
-		for(String s : semInfo.keySet())
+		for(ArrayList<String> semName : semInfo.keySet())
 		{
-			print(s);
-			in = scanner.nextFloat();
-			input.add(in);
+			for(String s : semName)
+			{
+				print(s);
+				in = scanner.nextFloat();
+				input.add(in);
+			}
+			
 		}
 		return input;
 	}
