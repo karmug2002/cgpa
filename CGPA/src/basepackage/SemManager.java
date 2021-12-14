@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 public final class SemManager
 {
+	//field variables
 	private HashMap<String,Semester> semesters;//Stores semester objects mapped to the semester name.
 	private String fileName;
 	
@@ -25,12 +26,14 @@ public final class SemManager
 	{
 		CSVParser cv = new CSVParser(fileName + "data.csv");
 		HashMap<String, HashMap<ArrayList<String>, ArrayList<Float>>> semestersInfo = cv.getSemesterInfos(); //get the semester Infos!!
+		
 		for(int k = 1; k<semestersInfo.size()+1; k++)
 		{
 			HashMap<ArrayList<String>,ArrayList<Float>> semInfo = semestersInfo.get("Semester "+k);
 			Semester sem = new Semester(semInfo);
 			semesters.put("Semester "+k , sem);//store the semester objects.
 		}
+		
 	}
 	
 	public float getCGPAForOneSem(int whichSem) //this method returns cgpa for the selected semester

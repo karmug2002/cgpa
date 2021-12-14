@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 final class InputProcessor
 {
+	//field variables
 	private HashMap<ArrayList<String>,ArrayList<Float>> semInfo;
 	private Scanner scanner;
 	private float in;
@@ -27,6 +28,7 @@ final class InputProcessor
 	{
 		
 		ArrayList<Float> input = new ArrayList<Float>();
+		
 		for(ArrayList<String> semName : semInfo.keySet())
 		{
 			for(String s : semName)
@@ -37,6 +39,7 @@ final class InputProcessor
 			}
 			
 		}
+		
 		return input;
 	}
 	

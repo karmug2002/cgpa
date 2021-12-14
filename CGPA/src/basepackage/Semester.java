@@ -19,6 +19,7 @@ final  class Semester
 	private float totalAcquiredCP;
 	private float totalGivenCP;
 	private ArrayList<Float> givenCPS;
+	//CPS = Credit Points
 	
 	public Semester(HashMap<ArrayList<String>,ArrayList<Float>> semInfo) throws IOException
 	{
@@ -27,6 +28,7 @@ final  class Semester
 	
 	private void sumGivenCPS() 
 	{
+		
 		for(ArrayList<Float> value : semInfo.values())
 		{
 			for(Float v : value)
@@ -35,6 +37,7 @@ final  class Semester
 			}
 			givenCPS = value; //initialize givenCPS from the semInfo
 		}
+		
 	}
 	
 	private void sumAcquiredCPS()
